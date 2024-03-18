@@ -2,28 +2,33 @@ package com.example.lunch.model;
 
 import jakarta.persistence.*;
 import jakarta.validation.constraints.*;
+import lombok.*;
 
 import java.time.LocalDateTime;
 
 
 @Entity
 @Table(name = "users")
+@Getter
+@Setter
+@NoArgsConstructor
+@ToString(exclude = "password")
 public class User extends AbstractBaseEntity {
 
-    @Column(name = "name", nullable = false)
+    @Column(name = "name", nullable = false, length = 15)
     @NotBlank
-    @Size(min = 5, max = 20)
+    @Size(min = 5, max = 15)
     private String name;
 
-    @Column(name = "email", nullable = false, unique = true)
+    @Column(name = "email", nullable = false, unique = true, length = 15)
     @Email
     @NotBlank
-    @Size(max = 128)
+    @Size(max = 15)
     private String email;
 
-    @Column(name = "password", nullable = false)
+    @Column(name = "password", nullable = false, length = 15)
     @NotBlank
-    @Size(min = 5, max = 128)
+    @Size(min = 5, max = 15)
     private String password;
 
     @Column(name = "admin", nullable = false)
@@ -33,73 +38,12 @@ public class User extends AbstractBaseEntity {
     private LocalDateTime lastVoteDateTime;
 
     @Column(name = "last_vote_restaurant")
-    private int lastVoteRestaurant;
-
-    public User() {
-    }
+    private Integer lastVoteRestaurant;
 
     public User(String name, String email, String password, boolean isAdmin) {
         this.name = name;
         this.email = email;
         this.password = password;
         this.isAdmin = isAdmin;
-    }
-
-    public User(Integer id, String name, String email, String password, boolean isAdmin) {
-        super(id);
-        this.name = name;
-        this.email = email;
-        this.password = password;
-        this.isAdmin = isAdmin;
-    }
-
-    public String getEmail() {
-        return email;
-    }
-
-    public void setEmail(String email) {
-        this.email = email;
-    }
-
-    public void setPassword(String password) {
-        this.password = password;
-    }
-
-    public void setAdmin(boolean admin) {
-        this.isAdmin = admin;
-    }
-
-    public boolean isAdmin() {
-        return isAdmin;
-    }
-
-    public String getPassword() {
-        return password;
-    }
-
-    public LocalDateTime getLastVoteDateTime() {
-        return lastVoteDateTime;
-    }
-
-    public void setLastVoteDateTime(LocalDateTime lastVote) {
-        this.lastVoteDateTime = lastVote;
-    }
-
-    public int getLastVoteRestaurant() {
-        return lastVoteRestaurant;
-    }
-
-    public void setLastVoteRestaurant(int lastVoteRestaurant) {
-        this.lastVoteRestaurant = lastVoteRestaurant;
-    }
-
-    @Override
-    public String toString() {
-        return "User{" +
-                "id=" + id +
-                ", email=" + email +
-                ", name=" + name +
-                ", isAdmin=" + isAdmin +
-                '}';
     }
 }

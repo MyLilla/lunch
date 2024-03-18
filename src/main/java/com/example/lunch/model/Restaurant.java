@@ -2,38 +2,21 @@ package com.example.lunch.model;
 
 import jakarta.persistence.*;
 import jakarta.validation.constraints.Size;
+import lombok.*;
 
 @Entity
 @Table(name = "restaurant")
+@Getter
+@Setter
+@NoArgsConstructor
+@AllArgsConstructor
+@ToString
 public class Restaurant extends AbstractBaseEntity {
 
-    @Column(name = "name")
-    @Size(min = 3, max = 15)
+    @Column(name = "name", nullable = false, length = 20)
+    @Size(min = 3, max = 20)
     private String name;
 
     @Column
     private int rating = 0;
-
-    public Restaurant() {
-    }
-
-    public Restaurant(String name) {
-        this.name = name;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public int getRating() {
-        return rating;
-    }
-
-    public void setRating(int rating) {
-        this.rating = rating;
-    }
 }
