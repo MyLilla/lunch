@@ -13,6 +13,6 @@ public interface UserRepository extends CrudRepository <User, Integer> {
 
     @Modifying
     @Query("SELECT u FROM User u")
-    public List<User> getAll();
+    List<User> getAll();
 
 }
